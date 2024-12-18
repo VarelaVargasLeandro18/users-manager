@@ -10,7 +10,7 @@ public interface CrudService<ID, DTO> {
 
     DTO create(DTO dto);
 
-    DTO update(ID id, DTO dto);
+    DTO update(DTO dto);
 
     void delete(ID id);
 

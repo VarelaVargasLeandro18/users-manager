@@ -11,7 +11,7 @@ public interface CrudController<ID, DTO> {
 
     DTO create(DTO dto);
 
-    DTO update(ID id, DTO dto);
+    DTO update(DTO dto);
 
     ResponseEntity<Void> delete(ID id);
 

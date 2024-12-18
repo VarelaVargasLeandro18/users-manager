@@ -59,5 +59,10 @@ public class UsersServicesImpl extends CrudServiceAbstract<UsersRepository, User
 
         return true;
     }
+
+    @Override
+    protected boolean isEntityExistsById(User entity) {
+        return this.repository.existsById(entity.getId());
+    }
     
 }
