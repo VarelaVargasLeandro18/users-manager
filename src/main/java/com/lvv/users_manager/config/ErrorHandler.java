@@ -22,11 +22,11 @@ public class ErrorHandler {
     private static final int ACCESS_DENIED_ERROR_CODE = 1003;
     private static final int UNAUTHORIZED_ERROR_CODE = 1004;
     private static final int RESOURCE_NOT_FOUND_ERROR_CODE = 1005;
-
+    
+    private static final String UNEXPECTED_ERROR_DESCRIPTION = "An unexpected error has ocurred in the application.";
     private static final String ACCESS_DENIED_DESCRIPTION = "You don't have permission to access this resource.";
     private static final String UNAUTHORIZED_DESCRIPTION = "You are not authorized to access this resource.";
     private static final String RESOURCE_NOT_FOUND_DESCRIPTION = "Resource not found.";
-    private static final String UNEXPECTED_ERROR_DESCRIPTION = "An unexpected error has ocurred in the application.";
 
     @ExceptionHandler(BussinessException.class)
     public ResponseEntity<BussinessErrorResponseDTO> handleBussinessException(BussinessException ex, HttpServletRequest request) {

@@ -77,9 +77,9 @@ public abstract class CrudControllerAbstractImpl<DTO, ID> implements CrudControl
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success"),
     })
-    @PutMapping("/{id}")
-    public DTO update(@PathVariable ID id, @RequestBody @Valid DTO dto) {
-        return this.crudService.update(id, dto);
+    @PutMapping()
+    public DTO update(@RequestBody @Valid DTO dto) {
+        return this.crudService.update(dto);
     }
 
     @Override

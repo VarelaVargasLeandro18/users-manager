@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.lvv.users_manager.exceptions.EntityAlreadyExistsException;
 import com.lvv.users_manager.exceptions.EntityNotFoundException;
 import com.lvv.users_manager.services.CrudService;
 
@@ -44,10 +43,10 @@ public abstract class CrudServiceAbstract<R extends JpaRepository<E, ID>, E, ID,
     }
 
     @Override
-    public DTO update(ID id, DTO dto) {
+    public DTO update(DTO dto) {
         E toUpdate = this.toEntity(dto);
 
-        if (!this.repository.existsById(id))
+        if (!this.isEntityExistsById(toUpdate))
             throw new EntityNotFoundException();
 
         E entity = this.repository.save(toUpdate);
@@ -68,6 +67,8 @@ public abstract class CrudServiceAbstract<R extends JpaRepository<E, ID>, E, ID,
 
     protected abstract ID getEntityId(E entity);
 
-    protected abstract boolean isEntityExists(E entity) throws EntityAlreadyExistsException;
+    protected abstract boolean isEntityExists(E entity);
+
+    protected abstract boolean isEntityExistsById(E entity);
 
 }
