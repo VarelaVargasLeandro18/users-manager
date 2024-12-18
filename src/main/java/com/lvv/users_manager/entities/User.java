@@ -3,10 +3,8 @@ package com.lvv.users_manager.entities;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,14 +30,13 @@ public class User {
     @Column(name = "USER_ID")
     private Integer id;
 
-    @Column(name = "USER_EMAIL")
+    @Column(name = "USER_EMAIL", unique = true, updatable = false)
     private String email;
 
-    @Column(name = "USER_NAME")
+    @Column(name = "USER_NAME", unique = true, updatable = false)
     private String username;
 
     @Column(name = "USER_HASH_PASSWORD")
-    @Basic( fetch = FetchType.LAZY )
     private String password;
 
     @Column(name = "FIRST_NAME")
