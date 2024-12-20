@@ -6,7 +6,7 @@ import com.lvv.users_manager.entities.Application;
 import com.lvv.users_manager.entities.User;
 import com.lvv.users_manager.exceptions.EntityAlreadyExistsException;
 import com.lvv.users_manager.mappers.UserMapper;
-import com.lvv.users_manager.mappers.helpers.PasswordHasherHelper;
+import com.lvv.users_manager.helpers.PasswordHasherHelper;
 import com.lvv.users_manager.models.UserDTO;
 import com.lvv.users_manager.repositories.ApplicationRepository;
 import com.lvv.users_manager.repositories.UsersRepository;
