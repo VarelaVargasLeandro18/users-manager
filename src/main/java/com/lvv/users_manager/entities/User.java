@@ -2,6 +2,7 @@ package com.lvv.users_manager.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -62,5 +65,23 @@ public class User {
         foreignKey = @ForeignKey(name = "USERS_APPLICATIONS_FK")    
     )
     private Application application;
+
+    @ManyToMany
+    @JoinTable(
+        name = "USER_ROLES",
+        joinColumns = @JoinColumn(
+            name = "USER_ID", 
+            referencedColumnName = "USER_ID", 
+            insertable = false, updatable = false,
+            foreignKey = @ForeignKey(name = "FK_USER_ROLES_USERS")    
+        ),
+        inverseJoinColumns = @JoinColumn(
+            name = "ROLE_ID", 
+            referencedColumnName = "ROLE_ID", 
+            insertable = false, updatable = false,
+            foreignKey = @ForeignKey(name = "FK_USER_ROLES_ROLES")    
+        )
+    )
+    private Set<Role> roles;
 
 }
