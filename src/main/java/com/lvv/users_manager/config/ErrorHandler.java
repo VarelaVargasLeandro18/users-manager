@@ -11,6 +11,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import com.lvv.users_manager.exceptions.BussinessException;
 import com.lvv.users_manager.models.BussinessErrorResponseDTO;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,10 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ErrorHandler {
 
-        private static final int UNEXPECTED_ERROR_CODE = 1002;
+    private static final int UNEXPECTED_ERROR_CODE = 1002;
     private static final int ACCESS_DENIED_ERROR_CODE = 1003;
     private static final int UNAUTHORIZED_ERROR_CODE = 1004;
     private static final int RESOURCE_NOT_FOUND_ERROR_CODE = 1005;
+    private static final int JWT_EXPIRED_ERROR = 1012;
     
     private static final String UNEXPECTED_ERROR_DESCRIPTION = "An unexpected error has ocurred in the application.";
     private static final String ACCESS_DENIED_DESCRIPTION = "You don't have permission to access this resource.";
@@ -57,6 +59,14 @@ public class ErrorHandler {
         BussinessErrorResponseDTO response = new BussinessErrorResponseDTO(RESOURCE_NOT_FOUND_DESCRIPTION,
                 RESOURCE_NOT_FOUND_ERROR_CODE, request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(response);
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<BussinessErrorResponseDTO> handleJwtExpiredException(ExpiredJwtException ex, HttpServletRequest request) {
+        BussinessErrorResponseDTO response = new BussinessErrorResponseDTO(ex.getMessage(),
+                JWT_EXPIRED_ERROR, request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(response);
     }
 
