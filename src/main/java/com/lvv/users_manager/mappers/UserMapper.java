@@ -8,7 +8,7 @@ import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
 import com.lvv.users_manager.entities.User;
-import com.lvv.users_manager.mappers.helpers.PasswordHasherHelper;
+import com.lvv.users_manager.helpers.PasswordHasherHelper;
 import com.lvv.users_manager.models.UserDTO;
 
 @Mapper(
@@ -22,6 +22,7 @@ public interface UserMapper {
     UserDTO toDTO(User entity);
     
     @Mapping( source = "password", target = "password", qualifiedByName = "hashPassword" )
+    @Mapping( ignore = true, target = "roles" )
     User toEntity(UserDTO dto, @Context PasswordHasherHelper passwordHasherHelper);
     
     @Named("hashPassword")
