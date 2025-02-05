@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -21,7 +20,6 @@ import com.lvv.users_manager.exceptions.UserApplicationNotMatchesException;
 import com.lvv.users_manager.utils.JWTUtils;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,10 +35,10 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
     private final HandlerExceptionResolver exceptionResolver;
 
-    @Value("${JWT-SECRET}")
+    @Value("${user-manager.JWT-SECRET}")
     private String jwtSecret;
 
-    @Value("${APP-UID}")
+    @Value("${user-manager.APP-UID}")
     private String appUID;
 
     public AuthenticationFilter(@Qualifier("handlerExceptionResolver") HandlerExceptionResolver exceptionResolver) {

@@ -26,7 +26,7 @@ public class LogInServiceImpl implements LogInService {
     private final UsersRepository usersRepository;
     private final PasswordHasherHelper passwordHasherHelper;
 
-    @Value("${JWT-SECRET}")
+    @Value("${user-manager.JWT-SECRET}")
     private String jwtSecret;
 
     @Override
