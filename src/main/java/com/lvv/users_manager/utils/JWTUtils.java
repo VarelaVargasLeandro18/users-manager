@@ -32,7 +32,7 @@ public class JWTUtils {
 
         ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
         Date issuedAt = Date.from(now.toInstant());
-        Date expiration = Date.from(now.plusHours(1).toInstant());
+        Date expiration = Date.from(now.plusHours(12).toInstant());
 
         return Jwts.builder()
             .subject(subject)
