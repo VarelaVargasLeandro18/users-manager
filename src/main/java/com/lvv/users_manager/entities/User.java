@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -15,13 +18,14 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "USERS", uniqueConstraints = { @UniqueConstraint(name = "UK_CREATION_DATE", columnNames = "CREATION_DATE"), @UniqueConstraint(name = "UK_LAST_UPDATED", columnNames = "LAST_UPDATED") })
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -51,9 +55,11 @@ public class User {
     @Column(name = "BIRTH_DATE")
     private LocalDate birthdate;
 
+    @CreationTimestamp
     @Column(name = "CREATION_DATE", insertable = false, updatable = false)
     private LocalDateTime creationDate;
 
+    @UpdateTimestamp
     @Column( name = "LAST_UPDATED", insertable = false, updatable = false)
     private LocalDateTime lastUpdated;
 
