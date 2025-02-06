@@ -1,14 +1,29 @@
 spring:
   application:
     name: users-manager-dev
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
   datasource:
     url: ***
     username: ***
     password: ***
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    show-sql: true
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+  logging:
+    org.hibernate.sql: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    level.com.zaxxer.hikari.HikariConfig: DEBUG
+    level.com.zaxxer.hikari: TRACE
 server:
-  port: 8081
+  port: 8080
   servlet:
     context-path: /users-manager
+
+user-manager:
+  JWT-SECRET: ***
+  APP-UID: ***
