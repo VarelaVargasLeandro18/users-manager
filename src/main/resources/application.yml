@@ -9,33 +9,37 @@ spring:
     resources:
       add-mappings: false
   datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
     hikari:
+      pool-name: users-manager
       connection-timeout: 10000
       minimumIdle: 5
       maximumPoolSize: 10
       maxLifetime: 7200000
       connectionTestQuery: SELECT 1
       retryTimeout: 5000
-    url: ${DATASOURCE_URL}
-    username: ${DATASOURCE_USERNAME}
-    password: ${DATASOURCE_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
   jpa:
     show-sql: ${SHOW_SQL:false}
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         strategy: org.hibernate.cfg.ImprovedNamingStrategy
-  sql:
-    init:
-      mode: never
   server:
     port: 8080
     servlet:
       context-path: /users-manager
-
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health
 user-manager:
   JWT-SECRET: ${JWT-SECRET}
   APP-UID: ${APP-UID}
