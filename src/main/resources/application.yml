@@ -32,7 +32,7 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         strategy: org.hibernate.cfg.ImprovedNamingStrategy
   server:
-    port: 8080
+    port: ${PORT:8080}
     servlet:
       context-path: /users-manager
   management:
