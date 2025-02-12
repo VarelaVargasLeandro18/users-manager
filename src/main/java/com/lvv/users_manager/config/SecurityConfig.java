@@ -1,12 +1,7 @@
 package com.lvv.users_manager.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,7 +16,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private static final String LOGIN_URL ="/auth/log-in";
+    private static final String LOGIN_URL = "/auth/log-in";
+    private static final String ACTUATOR_HEALTH_URI = "/actuator/health";
 
     private final AuthenticationFilter authenticationFilter;
 
@@ -31,7 +27,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(LOGIN_URL).permitAll()
+                        .requestMatchers(LOGIN_URL, ACTUATOR_HEALTH_URI).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(this.authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

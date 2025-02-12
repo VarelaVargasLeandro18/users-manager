@@ -1,6 +1,7 @@
 package com.lvv.users_manager.models;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -13,5 +14,6 @@ public record UserDTO(
                 String firstname,
                 String lastname,
                 LocalDate birthdate,
-                ApplicationDTO application) {
+                ApplicationDTO application,
+                Set<RoleDTO> roles) {
 }

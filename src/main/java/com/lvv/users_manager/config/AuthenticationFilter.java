@@ -32,6 +32,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
     private static final String ROLE_PREFIX = "ROLE_";
     private static final String LOGIN_URI = "/auth/log-in";
+    private static final String ACTUATOR_HEALTH_URI = "/actuator/health";
 
     private final HandlerExceptionResolver exceptionResolver;
 
@@ -91,7 +92,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
-        return request.getServletPath().equals(LOGIN_URI);
+        return request.getServletPath().equals(LOGIN_URI) || request.getServletPath().equals(ACTUATOR_HEALTH_URI);
     }
 
 

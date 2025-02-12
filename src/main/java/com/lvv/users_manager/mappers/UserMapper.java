@@ -14,7 +14,7 @@ import com.lvv.users_manager.models.UserDTO;
 @Mapper(
     componentModel = MappingConstants.ComponentModel.SPRING,
     unmappedTargetPolicy = ReportingPolicy.IGNORE,
-    uses = { ApplicationMapper.class }
+    uses = { ApplicationMapper.class, RoleMapperWithoutApplication.class }
 )
 public interface UserMapper {
 
